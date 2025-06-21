@@ -142,7 +142,7 @@ export function notLike(value: string): Comparison {
   return { operator: 'notLike', right: { value }, type: comparisonSymbol }
 }
 
-const nonLikeSafeRegexp = /[^a-zA-Z0-9]/g
+const nonLikeSafeRegexp = /[^a-zA-Z0-9а-яА-ЯёЁ]/g
 
 export function sanitizeLikeString(value: string): string {
   invariant(typeof value === 'string', 'Value passed to Q.sanitizeLikeString() is not a string')
@@ -198,13 +198,13 @@ export function unsafeLokiTransform(fn: LokiTransformFunction): LokiTransform {
 }
 
 export const and: ArrayOrSpreadFn<Where, And> = (...args): And => {
-  const clauses = fromArrayOrSpread<Where>(args, 'Q.and()', 'Where')
+  const clauses = fromArrayOrSpread < Where > (args, 'Q.and()', 'Where')
   validateConditions(clauses)
   return { type: 'and', conditions: clauses }
 }
 
 export const or: ArrayOrSpreadFn<Where, Or> = (...args): Or => {
-  const clauses = fromArrayOrSpread<Where>(args, 'Q.or()', 'Where')
+  const clauses = fromArrayOrSpread < Where > (args, 'Q.or()', 'Where')
   validateConditions(clauses)
   return { type: 'or', conditions: clauses }
 }
